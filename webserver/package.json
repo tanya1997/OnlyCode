@@ -1,0 +1,60 @@
+{
+  "name": "webserver",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "grommet": "^2.38.0",
+    "grommet-icons": "^4.12.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router": "^6.23.1",
+    "react-router-dom": "^6.23.1",
+    "react-scripts": "^5.0.1",
+    "styled-components": "^6.1.11"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.0",
+    "eslint": "^8.57.0",
+    "lint-staged": "^15.2.5",
+    "husky": "^9.0.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "eslint --quiet",
+    "prettier": "prettier '**/*.{svg,yml,js,ts,jsx,tsx,html,md,json}' --write"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,yml}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.css": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
