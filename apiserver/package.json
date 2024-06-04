@@ -1,0 +1,22 @@
+{
+  "name": "apierver",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "better-sqlite3": "7.4.3",
+    "express": "4.19.2",
+    "content-disposition": "0.5.3",
+    "cookie": "0.4.1",
+    "mime-types": "2.1.29",
+    "node-fetch": "2.6.7",
+    "raw-body": "2.4.1",
+    "route-trie": "3.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.0"
+  },
+  "scripts": {
+    "prettier": "prettier '**/*.{js,mjs,json}' --write",
+    "start": "node ./index.mjs"
+  }
+}
