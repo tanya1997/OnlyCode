@@ -1,15 +1,8 @@
-## First terminal
-
-```bash
-cd apiserver
-npm install
-npm start
-```
-
-## Second terminal
+## Getting started
 
 ```bash
 cd webserver
 npm install
 npm start
 ```
+

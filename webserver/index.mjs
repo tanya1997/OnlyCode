@@ -43,12 +43,15 @@ const ML_SERVER_HOST = getEnv("ML_SERVER_HOST");
 const ML_SERVER_PROTOCOL = getEnv("ML_SERVER_PROTOCOL");
 const ML_BASE_URL = `${ML_SERVER_PROTOCOL}://${ML_SERVER_HOST}:${ML_SERVER_PORT}`;
 
-const fetchMlServer = async ({ method, url, body }) => {
+const fetchMlServer = async ({ method, url, body, baseUrl }) => {
   if (url[0] !== "/") {
     throw new Error("urls must start with a leading slash");
   }
-  console.log(`${ML_BASE_URL}${url}`, { method, body });
-  const response = await fetch(`${ML_BASE_URL}${url}`, { method, body });
+  console.log(`${baseUrl ?? ML_BASE_URL}${url}`, { method, body });
+  const response = await fetch(`${baseUrl ?? ML_BASE_URL}${url}`, {
+    method,
+    body,
+  });
   const json = await response.json();
   return json;
 };
@@ -56,6 +59,14 @@ const fetchMlServer = async ({ method, url, body }) => {
 const rootDir = path.dirname(url.fileURLToPath(import.meta.url));
 
 const makeApiServer = async (app) => {
+  const publicPath = path.join(rootDir, "build");
+
+  app.use(express.static(publicPath));
+
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(publicPath, "index.html"));
+  });
+
   app.get("/ml", async (req, res) => {
     try {
       const response = await fetchMlServer({
@@ -75,7 +86,38 @@ const makeApiServer = async (app) => {
     try {
       const response = await fetchMlServer({
         method: "GET",
-        url: "/"
+        url: "/",
+      });
+      res.json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(500);
+      res.end();
+    }
+  });
+
+  app.get("/ml3", async (req, res) => {
+    try {
+      const response = await fetchMlServer({
+        method: "POST",
+        url: "/",
+        body: "Потребительский кредит под залог недвижимости со ставкой 17 процентов",
+        baseUrl: "http://5.35.11.130:3002",
+      });
+      res.json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(500);
+      res.end();
+    }
+  });
+
+  app.get("/ml4", async (req, res) => {
+    try {
+      const response = await fetchMlServer({
+        method: "GET",
+        url: "/",
+        baseUrl: "http://5.35.11.130:3002",
       });
       res.json(response);
     } catch (error) {
