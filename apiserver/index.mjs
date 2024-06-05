@@ -8,6 +8,7 @@ import * as fs from "fs";
 import SQLite from "better-sqlite3";
 import express from "express";
 import "dotenv/config";
+import fetch from "node-fetch";
 
 // UNSAFE EXPEREMENTAL API FOR INTERNAL USE ONLY!
 
@@ -59,7 +60,7 @@ const makeApiServer = async (app) => {
     try {
       const response = await fetchMlServer({
         method: "POST",
-        url: "/prompt",
+        url: "/",
         body: "Потребительский кредит под залог недвижимости со ставкой 17 процентов",
       });
       res.json(response);
