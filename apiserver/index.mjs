@@ -71,6 +71,20 @@ const makeApiServer = async (app) => {
     }
   });
 
+  app.get("/ml2", async (req, res) => {
+    try {
+      const response = await fetchMlServer({
+        method: "GET",
+        url: "/"
+      });
+      res.json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(500);
+      res.end();
+    }
+  });
+
   app.get("/direct-single-sql-query-exec", async (req, res) => {
     try {
       const result = JSON.stringify(
