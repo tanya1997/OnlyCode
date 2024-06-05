@@ -7,6 +7,7 @@ import * as url from "url";
 import * as fs from "fs";
 import SQLite from "better-sqlite3";
 import express from "express";
+import "dotenv/config";
 
 // UNSAFE EXPEREMENTAL API FOR INTERNAL USE ONLY!
 
@@ -27,9 +28,48 @@ import express from "express";
 // Images list as json
 // http://localhost:3000/images/
 
+const getEnv = (name) => {
+  const value = process.env[name];
+  if (value === "" || value == null) {
+    throw new Error(
+      `Please create .env (see .env.example) or set env "${name}"`,
+    );
+  }
+  return value;
+};
+const ML_SERVER_PORT = getEnv("ML_SERVER_PORT");
+const ML_SERVER_HOST = getEnv("ML_SERVER_HOST");
+const ML_SERVER_PROTOCOL = getEnv("ML_SERVER_PROTOCOL");
+const ML_BASE_URL = `${ML_SERVER_PROTOCOL}://${ML_SERVER_HOST}:${ML_SERVER_PORT}`;
+
+const fetchMlServer = async ({ method, url, body }) => {
+  if (url[0] !== "/") {
+    throw new Error("urls must start with a leading slash");
+  }
+  console.log(`${ML_BASE_URL}${url}`, { method, body });
+  const response = await fetch(`${ML_BASE_URL}${url}`, { method, body });
+  const json = await response.json();
+  return json;
+};
+
 const rootDir = path.dirname(url.fileURLToPath(import.meta.url));
 
 const makeApiServer = async (app) => {
+  app.get("/ml", async (req, res) => {
+    try {
+      const response = await fetchMlServer({
+        method: "POST",
+        url: "/prompt",
+        body: "Потребительский кредит под залог недвижимости со ставкой 17 процентов",
+      });
+      res.json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(500);
+      res.end();
+    }
+  });
+
   app.get("/direct-single-sql-query-exec", async (req, res) => {
     try {
       const result = JSON.stringify(
