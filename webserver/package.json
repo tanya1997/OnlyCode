@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel start:backend start:frontend",
-    "start:backend": "nodemon ./index.mjs",
+    "start:backend": "nodemon api/index.mjs",
     "start:frontend": "cross-env PORT=3001 BROWSER=none nodemon --exec \"react-scripts build\" --watch src",
     "lint": "eslint --quiet",
     "prettier": "prettier '**/*.{svg,yml,js,ts,jsx,tsx,html,md,json}' --write"
