@@ -326,7 +326,7 @@ const initApiServer = async () => {
   await new Promise((resolve, reject) => {
     const initApiErrorHandler = (err) => reject(err);
     server.once("error", initApiErrorHandler);
-    server.listen(3000, "127.0.0.1", () => {
+    server.listen(3000, "0.0.0.0", () => {
       server.removeListener("error", initApiErrorHandler);
       console.log(`Application listening on port 3000!`);
       resolve();

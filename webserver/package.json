@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cross-env": "^7.0.3",
     "grommet": "^2.38.0",
     "grommet-icons": "^4.12.1",
     "react": "^18.3.1",
@@ -13,13 +14,13 @@
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
-    "prettier": "^3.3.0",
     "eslint": "^8.57.0",
+    "husky": "^9.0.11",
     "lint-staged": "^15.2.5",
-    "husky": "^9.0.11"
+    "prettier": "^3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint --quiet",
