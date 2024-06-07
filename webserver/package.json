@@ -22,7 +22,8 @@
     "react-router": "^6.23.1",
     "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "python-bridge": "^1.1.0"
   },
   "devDependencies": {
     "prettier": "^3.3.1",
@@ -37,7 +38,10 @@
     "start:backend": "nodemon ./index.mjs",
     "start:frontend": "cross-env PORT=3001 BROWSER=none nodemon --exec \"react-scripts build\" --watch src",
     "lint": "eslint --quiet",
-    "prettier": "prettier '**/*.{svg,yml,js,ts,jsx,tsx,html,md,json}' --write"
+    "prettier": "prettier '**/*.{svg,yml,js,ts,jsx,tsx,html,md,json,mjs}' --write",
+    "ml:server:start": "node ./ml-start.mjs",
+    "ml:server:stop": "node ./ml-stop.mjs",
+    "ml:server:status": "node ./ml-status.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,yml}": [
