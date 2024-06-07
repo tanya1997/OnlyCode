@@ -1,6 +1,6 @@
-export const init = async sql => {
-    await sql(
-        `CREATE TABLE IF NOT EXISTS "Prompts"(
+export const init = async (sql) => {
+  await sql(
+    `CREATE TABLE IF NOT EXISTS "Prompts"(
           "PromptId" VARCHAR(190) NOT NULL,
           "UserName" VARCHAR(190) NOT NULL,
           "Status" VARCHAR(190) NOT NULL,
@@ -9,6 +9,6 @@ export const init = async sql => {
           "Output" JSON NULL,
           PRIMARY KEY("PromptId")
         );`,
-        true,
-    );
-}
+    true,
+  );
+};

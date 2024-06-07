@@ -1,20 +1,18 @@
-export const init = async sql => {
-    await sql(
-        `CREATE TABLE IF NOT EXISTS "Users"(
+export const init = async (sql) => {
+  await sql(
+    `CREATE TABLE IF NOT EXISTS "Users"(
           "UserName" VARCHAR(190) NOT NULL,
           "UserRole" VARCHAR(190) NULL,
           PRIMARY KEY("UserName")
         );`,
-        true,
-    );
-}
+    true,
+  );
+};
 
-export const handlers = app => sql => {
+export const handlers = (app) => (sql) => {
   app.get("/api/users", async (req, res) => {
     try {
-      const users = JSON.stringify(
-        await sql(`SELECT * FROM "Users"`),
-      );
+      const users = JSON.stringify(await sql(`SELECT * FROM "Users"`));
       res.end(users);
     } catch (error) {
       res.end(`${error}`);

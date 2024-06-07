@@ -4,16 +4,16 @@ import * as http from "http";
 import * as path from "path";
 import express from "express";
 
-import {HOST, PORT, reactScriptsBuildDir, rootDir} from "./constants.mjs";
-import {prepareRequestMiddleware} from "./prepare-request-middleware.mjs";
-import {initSqlite} from "./init-sqlite.mjs";
+import { HOST, PORT, reactScriptsBuildDir, rootDir } from "./constants.mjs";
+import { prepareRequestMiddleware } from "./prepare-request-middleware.mjs";
+import { initSqlite } from "./init-sqlite.mjs";
 import * as entities from "./entities/index.mjs";
 
 const startApiServer = (app) => async (sql) => {
   app.use("/api/*", prepareRequestMiddleware);
 
-  for(const {handlers} of Object.values(entities)) {
-    handlers?.(app)(sql)
+  for (const { handlers } of Object.values(entities)) {
+    handlers?.(app)(sql);
   }
 
   app.use(express.static(reactScriptsBuildDir));
@@ -67,10 +67,11 @@ const main = async () => {
     void finaliseAll();
   });
 
-  const app = express(); app.use("*", prepareRequestMiddleware);
+  const app = express();
+  app.use("*", prepareRequestMiddleware);
 
   try {
-    const { sql, finalizer: sqlFinalizer } = await initSqlite(entities)
+    const { sql, finalizer: sqlFinalizer } = await initSqlite(entities);
     finalizers.push(sqlFinalizer);
     finalizers.push(await startApiServer(app)(sql));
   } catch (error) {
