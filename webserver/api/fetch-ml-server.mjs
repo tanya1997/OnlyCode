@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-import { ML_BASE_URL } from './constants'
+import { ML_BASE_URL } from './constants.mjs'
 
 export const fetchMlServer = async ({ method, url, body, baseUrl }) => {
     if (url[0] !== "/") {

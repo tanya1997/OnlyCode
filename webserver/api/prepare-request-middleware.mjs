@@ -73,10 +73,11 @@ export const prepareRequestMiddleware = async (req, res, next) => {
         })
         : null;
 
-    req.runSqlQuery = runSqlQuery;
-    req.escapeId = escapeId;
-    req.escapeStr = escapeStr;
-    req.urlQuery = new url.URL(`http://defunct${req.url}`).search.substr(1);
+
+
+    try {
+        req.urlQuery = new url.URL(`http://defunct${req.url}`).search.substr(1);
+    } catch {}
     req.cookies = cookies;
     req.body = body;
 

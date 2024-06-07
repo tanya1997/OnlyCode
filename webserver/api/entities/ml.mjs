@@ -1,7 +1,7 @@
-import {fetchMlServer} from "../fetch-ml-server";
+import {fetchMlServer} from "../fetch-ml-server.mjs";
 
 export const handlers = app => sql => {
-    app.get("/ml", async (req, res) => {
+    app.get("/api/ml", async (req, res) => {
         try {
             const response = await fetchMlServer({
                 method: "POST",
@@ -16,7 +16,7 @@ export const handlers = app => sql => {
         }
     });
 
-    app.get("/ml2", async (req, res) => {
+    app.get("/api/ml2", async (req, res) => {
         try {
             const response = await fetchMlServer({
                 method: "GET",
@@ -30,7 +30,7 @@ export const handlers = app => sql => {
         }
     });
 
-    app.get("/ml3", async (req, res) => {
+    app.get("/api/ml3", async (req, res) => {
         try {
             const response = await fetchMlServer({
                 method: "POST",
@@ -46,7 +46,7 @@ export const handlers = app => sql => {
         }
     });
 
-    app.get("/ml4", async (req, res) => {
+    app.get("/api/ml4", async (req, res) => {
         try {
             const response = await fetchMlServer({
                 method: "GET",

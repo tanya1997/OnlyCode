@@ -2,33 +2,24 @@ import "dotenv/config";
 
 import * as http from "http";
 import * as path from "path";
-import * as url from "url";
 import express from "express";
-import {prepareRequestMiddleware} from "./prepare-request-middleware";
-import {HOST, PORT} from "./constants";
-import * as entities from "./entities";
-import {initSqlite} from "./init-sqlite.js";
 
-// Image as bytes stream
-// http://localhost:3000/images/original/NBO-new_tulips.png
-
-// Image as base64 encoded stream
-// http://localhost:3000/images/base64/NBO-new_tulips.png
-
-const rootDir = path.dirname(url.fileURLToPath(import.meta.url));
-const reactScriptsBuild = path.join(rootDir, "build");
+import {HOST, PORT, reactScriptsBuildDir, rootDir} from "./constants.mjs";
+import {prepareRequestMiddleware} from "./prepare-request-middleware.mjs";
+import {initSqlite} from "./init-sqlite.mjs";
+import * as entities from "./entities/index.mjs";
 
 const startApiServer = (app) => async (sql) => {
-  app.use("*", prepareRequestMiddleware);
+  app.use("/api/*", prepareRequestMiddleware);
 
   for(const {handlers} of Object.values(entities)) {
     handlers?.(app)(sql)
   }
 
-  app.use(express.static(reactScriptsBuild));
+  app.use(express.static(reactScriptsBuildDir));
 
   app.get("/", (req, res) => {
-    res.sendFile(path.join(reactScriptsBuild, "index.html"));
+    res.sendFile(path.join(reactScriptsBuildDir, "index.html"));
   });
 
   const server = new http.Server(app);
@@ -78,20 +69,10 @@ const main = async () => {
 
   const app = express(); app.use("*", prepareRequestMiddleware);
 
-  for(const {handlers} of Object.values(entities)) {
-    handlers?.(app)(sql)
-  }
-
-  app.use(express.static(reactScriptsBuild));
-
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(reactScriptsBuild, "index.html"));
-  });
-
   try {
     const { sql, finalizer: sqlFinalizer } = await initSqlite(entities)
-    finalizers.push();
-    finalizers.push(startApiServer(app));
+    finalizers.push(sqlFinalizer);
+    finalizers.push(await startApiServer(app)(sql));
   } catch (error) {
     console.error(`Initialisation error: ${error}`);
     await finaliseAll();

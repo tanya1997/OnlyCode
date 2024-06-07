@@ -99,5 +99,8 @@ export const initSqlite = async (entities) => {
     const finalizer = async () => {
         await connection.close();
     };
-    return finalizer;
+    return {
+        sql: directRunQuery,
+        finalizer
+    };
 };

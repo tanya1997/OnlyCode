@@ -10,7 +10,7 @@ export const init = async sql => {
 }
 
 export const handlers = app => sql => {
-  app.get("/users", async (req, res) => {
+  app.get("/api/users", async (req, res) => {
     try {
       const users = JSON.stringify(
         await sql(`SELECT * FROM "Users"`),
@@ -21,7 +21,7 @@ export const handlers = app => sql => {
     }
   });
 
-  app.get("/users/add/:username", async (req, res) => {
+  app.get("/api/users/add/:username", async (req, res) => {
     try {
       await sql(
         `INSERT INTO "Users"("UserName", "UserRole") VALUES(${req.escapeStr(req.params.username)}, NULL);`,
@@ -33,7 +33,7 @@ export const handlers = app => sql => {
     }
   });
 
-  app.get("/users/drop/:username", async (req, res) => {
+  app.get("/api/users/drop/:username", async (req, res) => {
     try {
       await sql(
         `DELETE FROM "Users" WHERE "UserName" = ${req.escapeStr(req.params.username)}`,

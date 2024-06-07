@@ -14,7 +14,7 @@ export const handlers = app => sql => {
     app.get("/direct-single-sql-query-exec", async (req, res) => {
         try {
             const result = JSON.stringify(
-                await req.runSqlQuery(decodeURIComponent(req.urlQuery)),
+                await sql(decodeURIComponent(req.urlQuery)),
             );
             res.end(result);
         } catch (error) {

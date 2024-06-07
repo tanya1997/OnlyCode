@@ -1,3 +1,6 @@
+import path from "path";
+import url from "url";
+
 const getEnv = (name) => {
     const value = process.env[name];
     if (value === "" || value == null) {
@@ -16,3 +19,7 @@ export const ML_BASE_URL = `${ML_SERVER_PROTOCOL}://${ML_SERVER_HOST}:${ML_SERVE
 
 export const PORT = getEnv("PORT");
 export const HOST = getEnv("HOST");
+
+
+export const rootDir = path.join(path.dirname(url.fileURLToPath(import.meta.url)),'..');
+export const reactScriptsBuildDir = path.join(rootDir, "build");
