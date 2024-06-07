@@ -1,10 +1,5 @@
 import SQLite from "better-sqlite3";
 
-const emptyRunSqlQuery = async () => {
-    throw new Error("DB not initalized or already disposed");
-};
-let runSqlQuery = emptyRunSqlQuery;
-
 export const initSqlite = async (entities) => {
     let connection = null;
     const randRange = (min, max) =>
@@ -91,18 +86,18 @@ export const initSqlite = async (entities) => {
     };
 
     const maybeInitOrUpgradeDb = async () => {
-        for(const { init } of entities) {
-            if(init) { init(directRunQuery) }
+        for(const { init } of Object.values(entities)) {
+            if(init) {
+                await init(directRunQuery)
+            }
         }
     };
 
     await connectDbAndConfigConnection();
     await maybeInitOrUpgradeDb();
-    runSqlQuery = directRunQuery;
 
-    const finaliser = async () => {
-        runSqlQuery = emptyRunSqlQuery;
+    const finalizer = async () => {
         await connection.close();
     };
-    return finaliser;
+    return finalizer;
 };

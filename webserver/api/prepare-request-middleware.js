@@ -41,10 +41,6 @@ const wrapHeadersCaseInsensitive = (headersMap) =>
         }, {}),
     );
 
-const escapeId = (str) => `"${String(str).replace(/(["])/gi, "$1$1")}"`;
-
-const escapeStr = (str) => `'${String(str).replace(/(['])/gi, "$1$1")}'`;
-
 
 export const prepareRequestMiddleware = async (req, res, next) => {
     const headers = wrapHeadersCaseInsensitive(req.headers);

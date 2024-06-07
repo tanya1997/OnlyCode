@@ -1,7 +1,10 @@
 import fs from "fs";
 import path from "path";
 
-export const handlers = app => {
+// Images list as json
+// http://localhost:3000/images/
+
+export const handlers = app => sql => {
     app.get("/images", async (req, res) => {
         try {
             const imageList = fs.readdirSync(path.join(rootDir, "images"));

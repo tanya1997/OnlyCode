@@ -1,6 +1,6 @@
 import {fetchMlServer} from "../fetch-ml-server";
 
-export const handlers = app => {
+export const handlers = app => sql => {
     app.get("/ml", async (req, res) => {
         try {
             const response = await fetchMlServer({
