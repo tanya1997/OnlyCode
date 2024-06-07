@@ -2,9 +2,6 @@
   "name": "webserver",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">= 20"
-  },
   "dependencies": {
     "better-sqlite3": "^11.0.0",
     "express": "^4.19.2",
@@ -34,7 +31,7 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel start:backend start:frontend",
-    "start:backend": "nodemon ./index.mjs",
+    "start:backend": "nodemon api/index.mjs",
     "start:frontend": "cross-env PORT=3001 BROWSER=none nodemon --exec \"react-scripts build\" --watch src",
     "lint": "eslint --quiet",
     "prettier": "prettier '**/*.{svg,yml,js,ts,jsx,tsx,html,md,json}' --write"
