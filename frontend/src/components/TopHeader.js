@@ -42,19 +42,22 @@ export const TopHeader = () => {
                 // label="Menu"
                 items={[
                   {
-                    icon: <LoginIcon />,
-                    label: " Выйти",
+                    icon: <LogoutIcon />,
+                    label: "Выйти",
                     onClick: onLogout,
+                    gap: "small",
                   },
                   {
                     icon: <LoginIcon />,
-                    label: " История запросов",
+                    label: "История запросов",
                     onClick: () => navigate("/history"),
+                    gap: "small",
                   },
                   {
                     icon: <UsersIcon />,
-                    label: " Пользователи",
+                    label: "Пользователи",
                     onClick: () => navigate("/users"),
+                    gap: "small",
                   },
                 ]}
               />

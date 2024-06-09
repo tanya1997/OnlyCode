@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { TopHeader } from "./TopHeader";
-import { getIsLogin, getMLStatus } from "../redux/selectors";
+import { getMLStatus } from "../redux/selectors";
 import { LandingPage } from "../pages/LandingPage";
 
 const theme = {
