@@ -2,7 +2,7 @@ import { clearSession, getSession, saveSession } from "./session";
 import { request } from "./request";
 import { b64toBlobUrl } from "./b64-to-blob-url";
 
-export const api = () => {
+export const createApi = () => {
   const headers = {};
 
   const { token, isAdmin } = getSession();
@@ -12,12 +12,17 @@ export const api = () => {
     /* LOGIN / LOGOUT */
 
     async login({ username, password }) {
-      const { token, isAdmin } = request({
-        url: "/api/login",
-        method: "POST",
-        payload: { username, password },
-      });
-      saveSession({ headers, token, isAdmin });
+      try {
+        const { token, isAdmin } = await request({
+          url: "/api/login",
+          method: "POST",
+          payload: { username, password },
+        });
+        saveSession({ headers, token, isAdmin });
+      } catch (error) {
+        error.name = "LoginError";
+        throw error;
+      }
     },
 
     async logout() {
@@ -27,26 +32,41 @@ export const api = () => {
     /* ML */
 
     async startML() {
-      await request({ url: "/api/ml/start", method: "PUT", payload: {} });
+      try {
+        await request({ url: "/api/ml/start", method: "PUT", payload: {} });
+      } catch (error) {
+        error.name = "StartMLServerError";
+        throw error;
+      }
     },
 
     async stopML() {
-      await request({ url: "/api/ml/stop", method: "PUT", payload: {} });
+      try {
+        await request({ url: "/api/ml/stop", method: "PUT", payload: {} });
+      } catch (error) {
+        error.name = "StopMLServerError";
+        throw error;
+      }
     },
 
     async statusML() {
-      const { status } = request({
-        url: "/api/ml/status",
-        method: "GET",
-        payload: {},
-      });
-      return status;
+      try {
+        const { status } = await request({
+          url: "/api/ml/status",
+          method: "GET",
+          payload: {},
+        });
+        return status;
+      } catch (error) {
+        error.name = "GetMLStatusError";
+        throw error;
+      }
     },
 
     /* PROMPTS */
 
     async sendPrompt({ text }) {
-      const { id, text, imgIds, rating } = await request({
+      const { id, imgIds, rating } = await request({
         url: "/api/prompts",
         method: "POST",
         payload: { text },
@@ -151,6 +171,14 @@ export const api = () => {
         payload: { username },
         headers,
       });
+    },
+
+    getSession() {
+      return getSession();
+    },
+
+    clearSession() {
+      return clearSession({ headers });
     },
   };
 };

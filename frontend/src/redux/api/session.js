@@ -1,24 +1,24 @@
-import { deleteCookie, setCookie, getCookie } from "./cookies";
+import Cookies from "js-cookie";
 
 export const getSession = () => {
   return {
-    token: getCookie("token"),
-    isAdmin: getCookie("isAdmin"),
+    token: Cookies.get("token") ?? null,
+    isAdmin: Cookies.get("isAdmin") ?? false,
   };
 };
 
 export const saveSession = ({ headers, token, isAdmin }) => {
   if (token == null) {
-    return clearSession(headers);
+    return clearSession({ headers });
   }
 
   headers["Authorization"] = `Basic ${token}`;
-  setCookie("token", token);
-  setCookie("isAdmin", isAdmin);
+  Cookies.set("token", token);
+  Cookies.set("isAdmin", isAdmin);
 };
 
 export const clearSession = ({ headers }) => {
   delete headers["Authorization"];
-  deleteCookie("token");
-  deleteCookie("isAdmin");
+  Cookies.remove("token");
+  Cookies.remove("isAdmin");
 };

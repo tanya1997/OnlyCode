@@ -1,10 +1,8 @@
-import "dotenv/config";
-
 import * as http from "http";
 import * as path from "path";
 import express from "express";
 
-import { HOST, PORT, reactScriptsBuildDir, rootDir } from "./constants.mjs";
+import { HOST, PORT, reactScriptsBuildDir } from "./constants.mjs";
 import { prepareRequestMiddleware } from "./prepare-request-middleware.mjs";
 import { initSqlite } from "./init-sqlite.mjs";
 import * as entities from "./entities/index.mjs";
