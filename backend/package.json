@@ -14,26 +14,8 @@
   },
   "scripts": {
     "start": "dotenvx run --env-file=.env.default --env-file=.env -- nodemon api/index.mjs",
-    "ml:server:start": "node ./ml-start.mjs",
-    "ml:server:stop": "node ./ml-stop.mjs",
-    "ml:server:status": "node ./ml-status.mjs"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "ml:server:start": "node api/ml-server-utils/ml-start.mjs",
+    "ml:server:stop": "node api/ml-server-utils/ml-stop.mjs",
+    "ml:server:status": "dotenvx run --env-file=.env.default --env-file=.env -- node api/ml-server-utils/ml-status.mjs"
   }
 }

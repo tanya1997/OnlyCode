@@ -1,6 +1,6 @@
 import doInPython from "./ml-utility.mjs";
 
-const startServer = async (serverNameOrId) => {
+export const startServer = async (serverNameOrId) => {
   return await doInPython(async (python) => {
     await python.ex`import openstack`;
 
@@ -17,7 +17,7 @@ const startServer = async (serverNameOrId) => {
 
     let result = false;
     try {
-      result = await python`start_server(${String(serverNameOrId)})`;
+      result = await python`start_server(${String("Tina")})`;
     } catch (error) {
       if (
         error.message != null &&
@@ -34,9 +34,3 @@ const startServer = async (serverNameOrId) => {
     return result;
   });
 };
-
-const main = async () => {
-  console.log(await startServer("Tina"));
-};
-
-void main();
