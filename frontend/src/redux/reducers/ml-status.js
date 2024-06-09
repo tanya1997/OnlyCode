@@ -1,6 +1,6 @@
 import { ActionTypes } from "../actions";
 
-const initialState = false
+const initialState = false;
 
 export const mlStatus = (state = initialState, action) => {
   switch (action.type) {

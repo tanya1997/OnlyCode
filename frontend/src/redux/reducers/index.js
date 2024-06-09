@@ -7,5 +7,5 @@ import { mlStatus } from "./ml-status";
 export const reducer = combineReducers({
   session,
   loginForm,
-  mlStatus
+  mlStatus,
 });

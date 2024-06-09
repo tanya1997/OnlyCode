@@ -4,7 +4,7 @@ import { Box, Button, Carousel, Heading, Image, Spinner, Text } from "grommet";
 export const LandingPage = memo(() => {
   return (
     <Box width="xlarge" overflow="hidden" gap="small" pad="small">
-      <Heading level={1}>Сервис генерации маркетинговых изображений</Heading>
+      <Heading level={2}>Сервис генерации маркетинговых изображений</Heading>
 
       <Text>
         Сервера с GPU дорогие, поэтому предлагаем вам включить его вручную.

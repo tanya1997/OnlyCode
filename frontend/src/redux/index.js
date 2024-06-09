@@ -11,8 +11,7 @@ const composeEnhancers =
     : compose;
 
 export const createStore = ({ router }) => {
-
-console.log(44)
+  console.log(44);
   const api = createApi();
   const sagaMiddleware = createSagaMiddleware();
 

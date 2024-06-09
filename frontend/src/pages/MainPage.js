@@ -3,6 +3,7 @@ import { Button, Box, ThumbsRating, TextArea } from "grommet";
 import { useSelector } from "react-redux";
 
 import { getIsLogin } from "../redux/selectors";
+import { LandingPage } from "./LandingPage";
 
 const PromptPage = memo(() => {
   const [input, setInput] = useState("");
