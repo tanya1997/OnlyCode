@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { rootDir } from "../constants.mjs";
 
 // Images list as json
 // http://localhost:3000/images/

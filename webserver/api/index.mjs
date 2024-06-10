@@ -4,7 +4,7 @@ import * as http from "http";
 import * as path from "path";
 import express from "express";
 
-import { HOST, PORT, reactScriptsBuildDir, rootDir } from "./constants.mjs";
+import { HOST, PORT, reactScriptsBuildDir } from "./constants.mjs";
 import { prepareRequestMiddleware } from "./prepare-request-middleware.mjs";
 import { initSqlite } from "./init-sqlite.mjs";
 import * as entities from "./entities/index.mjs";
@@ -51,14 +51,14 @@ const main = async () => {
             fn();
           })
           .catch((error) => {
-            console.error(`Finalisation error: ${error}`);
+            console.error(`Finalisation error: ${error.stack}`);
           }),
       ),
     );
     process.exit(1);
   };
   const unexpectedErrorHandler = (error) => {
-    console.error(`Unhandler exception or rejection: ${error}`);
+    console.error(`Unhandler exception or rejection: ${error.stack}`);
     void finaliseAll();
   };
   process.on("uncaughtException", unexpectedErrorHandler);
@@ -75,7 +75,7 @@ const main = async () => {
     finalizers.push(sqlFinalizer);
     finalizers.push(await startApiServer(app)(sql));
   } catch (error) {
-    console.error(`Initialisation error: ${error}`);
+    console.error(`Initialisation error: ${error.stack}`);
     await finaliseAll();
   }
 };

@@ -1,6 +1,6 @@
 import * as cookie from "cookie";
 import * as mimeTypes from "mime-types";
-import * as getRawBody from "raw-body";
+import getRawBody from "raw-body";
 import url from "url";
 
 const normalizeKey = (key, mode) => {
@@ -42,41 +42,46 @@ const wrapHeadersCaseInsensitive = (headersMap) =>
   );
 
 export const prepareRequestMiddleware = async (req, res, next) => {
-  const headers = wrapHeadersCaseInsensitive(req.headers);
-  const cookies =
-    headers.cookie != null && headers.cookie.constructor === String
-      ? cookie.parse(headers.cookie)
-      : {};
-
-  const [contentType, optionsEntry] = headers.hasOwnProperty("Content-Type")
-    ? String(headers["Content-Type"])
-        .split(";")
-        .map((value) => value.trim().toLowerCase())
-    : [];
-
-  let charset = null;
-  if (optionsEntry != null && optionsEntry.startsWith("charset=")) {
-    charset = optionsEntry.substring("charset=".length);
-  }
-
-  if (charset == null) {
-    const mimeCharset =
-      contentType != null ? mimeTypes.charset(contentType) : null;
-    charset = !!mimeCharset ? mimeCharset : "latin1";
-  }
-
-  const body = headers.hasOwnProperty("Content-Length")
-    ? await getRawBody(req, {
-        length: headers["Content-Length"],
-        encoding: charset,
-      })
-    : null;
-
   try {
-    req.urlQuery = new url.URL(`http://defunct${req.url}`).search.substr(1);
-  } catch {}
-  req.cookies = cookies;
-  req.body = body;
+    const headers = wrapHeadersCaseInsensitive(req.headers);
+    const cookies =
+      headers.cookie != null && headers.cookie.constructor === String
+        ? cookie.parse(headers.cookie)
+        : {};
 
-  next();
+    const [contentType, optionsEntry] = headers.hasOwnProperty("Content-Type")
+      ? String(headers["Content-Type"])
+          .split(";")
+          .map((value) => value.trim().toLowerCase())
+      : [];
+
+    let charset = null;
+    if (optionsEntry != null && optionsEntry.startsWith("charset=")) {
+      charset = optionsEntry.substring("charset=".length);
+    }
+
+    if (charset == null) {
+      const mimeCharset =
+        contentType != null ? mimeTypes.charset(contentType) : null;
+      charset = !!mimeCharset ? mimeCharset : "latin1";
+    }
+
+    const body =
+      headers.hasOwnProperty("Content-Length") && headers["Content-Length"] > 0
+        ? await getRawBody(req, {
+            length: headers["Content-Length"],
+            encoding: charset,
+          })
+        : null;
+
+    try {
+      req.urlQuery = new url.URL(`http://defunct${req.url}`).search.substr(1);
+    } catch {}
+    req.cookies = cookies;
+    req.body = body;
+
+    next();
+  } catch (error) {
+    await res.end(`API middleware error: ${error.stack}`);
+  }
 };
