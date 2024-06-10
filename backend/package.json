@@ -7,15 +7,13 @@
     "content-disposition": "^0.5.4",
     "cookie": "^0.6.0",
     "mime-types": "^2.1.35",
-    "raw-body": "^2.5.2",
+    "body-parser": "^1.20.2",
     "node-fetch": "^2.7.0",
-    "cross-env": "^7.0.3",
-    "python-bridge": "^1.1.0"
+    "cors": "^2.8.5",
+    "express-http-proxy": "^2.0.0"
   },
   "scripts": {
-    "start": "dotenvx run --env-file=.env.default --env-file=.env -- nodemon api/index.mjs",
-    "ml:server:start": "node api/ml-server-utils/ml-start.mjs",
-    "ml:server:stop": "node api/ml-server-utils/ml-stop.mjs",
-    "ml:server:status": "dotenvx run --env-file=.env.default --env-file=.env -- node api/ml-server-utils/ml-status.mjs"
+    "start": "dotenvx run --env-file=.env --env-file=.env.default -- nodemon api/index.mjs",
+    "start:prod": "node api/index.mjs"
   }
 }

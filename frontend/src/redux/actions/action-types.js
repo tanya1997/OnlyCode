@@ -1,6 +1,8 @@
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
+export const UPDATE_SESSION = "UPDATE_SESSION";
+
 export const UPDATE_USERNAME = "UPDATE_USERNAME";
 export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
@@ -8,3 +10,5 @@ export const START_ML_SERVER = "START_ML_SERVER";
 export const STOP_ML_SERVER = "STOP_ML_SERVER";
 export const REQUEST_ML_SERVER_STATUS = "REQUEST_ML_SERVER_STATUS";
 export const UPDATE_ML_SERVER_STATUS = "UPDATE_ML_SERVER_STATUS";
+
+export const SEND_PROMPT = "SEND_PROMPT";

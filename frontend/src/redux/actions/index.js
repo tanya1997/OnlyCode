@@ -21,6 +21,11 @@ export const updatePassword = (password) => ({
   payload: { password },
 });
 
+export const updateSession = (session) => ({
+  type: ActionTypes.UPDATE_SESSION,
+  payload: { session },
+});
+
 export const updateMLStatus = (status) => ({
   type: ActionTypes.UPDATE_ML_SERVER_STATUS,
   payload: { status },
@@ -39,4 +44,9 @@ export const startMLServer = () => ({
 export const stopMLServer = () => ({
   type: ActionTypes.STOP_ML_SERVER,
   payload: {},
+});
+
+export const sendPrompt = (text) => ({
+  type: ActionTypes.SEND_PROMPT,
+  payload: { text },
 });

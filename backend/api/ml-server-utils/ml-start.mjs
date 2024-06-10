@@ -1,36 +1,19 @@
-import doInPython from "./ml-utility.mjs";
+import fetch from "node-fetch";
 
-export const startServer = async (serverNameOrId) => {
-  return await doInPython(async (python) => {
-    await python.ex`import openstack`;
+import { getMLStatus } from "./ml-status.mjs";
 
-    await python.ex`
-        def start_server(serv_id):
-            ost_conn = openstack.connect()
-            ost_server = ost_conn.compute.find_server(serv_id)
-            if ost_server != None:
-                ost_conn.compute.unshelve_server(ost_server)
-                return True
-            else:
-                return False
-        `;
+export const startMLServer = async () => {
+  const { serverId, token } = await getMLStatus();
 
-    let result = false;
-    try {
-      result = await python`start_server(${String("Tina")})`;
-    } catch (error) {
-      if (
-        error.message != null &&
-        error.message.constructor === String &&
-        error.message.indexOf("openstack.exceptions.ConflictException") > -1
-      ) {
-        // Server already started
-        result = true;
-      } else {
-        throw error;
-      }
-    }
-
-    return result;
-  });
+  await fetch(
+    `https://ru-7.cloud.api.selcloud.ru/compute/v2.1/servers/${serverId}/action`,
+    {
+      method: "POST",
+      body: JSON.stringify({ unshelve: null }),
+      headers: {
+        "X-Auth-Token": token,
+        "Content-Type": "application/json",
+      },
+    },
+  );
 };

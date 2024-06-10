@@ -3,7 +3,9 @@ import { request } from "./request";
 import { b64toBlobUrl } from "./b64-to-blob-url";
 
 export const createApi = () => {
-  const headers = {};
+  const headers = {
+    "Content-Type": "application/json",
+  };
 
   const { token, isAdmin } = getSession();
   saveSession({ headers, token, isAdmin });
@@ -19,6 +21,7 @@ export const createApi = () => {
           payload: { username, password },
         });
         saveSession({ headers, token, isAdmin });
+        return { token, isAdmin };
       } catch (error) {
         error.name = "LoginError";
         throw error;
@@ -66,13 +69,60 @@ export const createApi = () => {
     /* PROMPTS */
 
     async sendPrompt({ text }) {
-      const { id, imgIds, rating } = await request({
+      await request({
         url: "/api/prompts",
         method: "POST",
-        payload: { text },
+        payload: {
+          client_id: "int",
+          user_info: {
+            gender: "string",
+            age: "int",
+            wage: "int",
+            registration: "bool",
+          },
+          banner: {
+            type: "png",
+            count: "int",
+            banner_type: "megabanner",
+            width: "512",
+            height: "512",
+          },
+          prompt: "string",
+          product: "кредитная карта",
+        },
         headers,
       });
-      return { id, text, imgIds, rating };
+      // await request({
+      //   url: "/api/prompts",
+      //   method: "POST",
+      //   payload: {
+      //     client_id: "234",
+      //     user_info: {
+      //       gender: "мужской",
+      //       age: "22",
+      //       wage: "100500",
+      //       registration: "true",
+      //     },
+      //     banner: {
+      //       type: "png", //image/png
+      //       count: "1", //под вопросом (нужен ли он нам)
+      //       banner_type: "megabanner", //ghost, megabanner, nbo (надо их подругому назвать наверно)
+      //       width: "512",
+      //       height: "512",
+      //     },
+      //     prompt: "кредит",
+      //     product: "автокредит",
+      //   },
+      //   headers,
+      // });
+
+      // const { id, imgIds, rating } = await request({
+      //   url: "/api/prompts",
+      //   method: "POST",
+      //   payload: { text },
+      //   headers,
+      // });
+      // return { id, text, imgIds, rating };
     },
 
     async listPrompts() {

@@ -1,8 +1,9 @@
 import React, { useCallback, useState, memo } from "react";
 import { Button, Box, ThumbsRating, TextArea } from "grommet";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getIsLogin } from "../redux/selectors";
+import { sendPrompt } from "../redux/actions";
 import { LandingPage } from "./LandingPage";
 
 const PromptPage = memo(() => {
@@ -14,6 +15,12 @@ const PromptPage = memo(() => {
 
   const [imgSrc, setImgSrc] = useState("");
 
+  const dispatch = useDispatch();
+  const sendPromptToMl = useCallback(
+    () => dispatch(sendPrompt(input)),
+    [dispatch],
+  );
+
   return (
     <Box align="center" justify="center" pad="small">
       <TextArea value={input} onChange={inputChangeHandler} />
@@ -21,6 +28,7 @@ const PromptPage = memo(() => {
         primary
         label="Сделать хорошо"
         onClick={() => {
+          sendPromptToMl();
           setImgSrc("https://www.personal-dom.ru/data/files/banner2.jpg");
         }}
       />

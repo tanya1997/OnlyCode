@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Nav, Menu, Header, Box, ResponsiveContext } from "grommet";
+import { Menu, Header, Box } from "grommet";
 import {
   Menu as MenuIcon,
   Login as LoginIcon,
@@ -33,66 +33,41 @@ export const TopHeader = () => {
       <Box direction="row" align="center" gap="small">
         <TopHeaderLink to="/" label="OnlyCode" />
       </Box>
-      {isMLServerAvailable && (
-        <ResponsiveContext.Consumer>
-          {(responsive) =>
-            responsive === "small" ? (
-              <Menu
-                icon={<MenuIcon />}
-                // label="Menu"
-                items={[
-                  {
-                    icon: <LogoutIcon />,
-                    label: "Выйти",
-                    onClick: onLogout,
-                    gap: "small",
-                  },
-                  {
-                    icon: <LoginIcon />,
-                    label: "История запросов",
-                    onClick: () => navigate("/history"),
-                    gap: "small",
-                  },
-                  {
-                    icon: <UsersIcon />,
-                    label: "Пользователи",
-                    onClick: () => navigate("/users"),
-                    gap: "small",
-                  },
-                ]}
-              />
-            ) : (
-              <Nav direction="row">
-                {isLogin ? (
-                  <>
-                    <TopHeaderLink
-                      onClick={onLogout}
-                      icon={<LoginIcon />}
-                      label="Выйти"
-                    />
-                    <TopHeaderLink
-                      to="/history"
-                      icon={<HistoryIcon />}
-                      label="История запросов"
-                    />
-                    <TopHeaderLink
-                      to="/users"
-                      icon={<UsersIcon />}
-                      label="Пользователи"
-                    />
-                  </>
-                ) : (
-                  <TopHeaderLink
-                    to="/login"
-                    icon={<LoginIcon />}
-                    label="Войти"
-                  />
-                )}
-              </Nav>
-            )
-          }
-        </ResponsiveContext.Consumer>
-      )}
+      <Menu
+        disabled={!isMLServerAvailable}
+        icon={<MenuIcon />}
+        items={
+          isLogin
+            ? [
+                {
+                  icon: <LogoutIcon />,
+                  label: "Выйти",
+                  onClick: onLogout,
+                  gap: "small",
+                },
+                {
+                  icon: <HistoryIcon />,
+                  label: "История запросов",
+                  onClick: () => navigate("/history"),
+                  gap: "small",
+                },
+                {
+                  icon: <UsersIcon />,
+                  label: "Пользователи",
+                  onClick: () => navigate("/users"),
+                  gap: "small",
+                },
+              ]
+            : [
+                {
+                  icon: <LoginIcon />,
+                  label: "Войти",
+                  onClick: () => navigate("/login"),
+                  gap: "small",
+                },
+              ]
+        }
+      />
     </Header>
   );
 };

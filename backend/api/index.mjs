@@ -1,15 +1,14 @@
 import * as http from "http";
 import * as path from "path";
 import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
 
 import { HOST, PORT, reactScriptsBuildDir } from "./constants.mjs";
-import { prepareRequestMiddleware } from "./prepare-request-middleware.mjs";
 import { initSqlite } from "./init-sqlite.mjs";
 import * as entities from "./entities/index.mjs";
 
 const startApiServer = (app) => async (sql) => {
-  app.use("/api/*", prepareRequestMiddleware);
-
   for (const { handlers } of Object.values(entities)) {
     handlers?.(app)(sql);
   }
@@ -66,8 +65,8 @@ const main = async () => {
   });
 
   const app = express();
-  app.use("*", prepareRequestMiddleware);
-
+  app.use(cors());
+  app.use(bodyParser.json());
   try {
     const { sql, finalizer: sqlFinalizer } = await initSqlite(entities);
     finalizers.push(sqlFinalizer);
