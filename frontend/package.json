@@ -23,8 +23,8 @@
     "@types/redux-saga": "^0.10.5"
   },
   "scripts": {
-    "start": "dotenvx run --env-file=.env.default --env-file=.env -- react-scripts start",
-    "build": "dotenvx run --env-file=.env.default --env-file=.env -- react-scripts build"
+    "start": "dotenvx run --env-file=../.env.example -- cross-env PORT=3001 HOST=0.0.0.0 react-scripts start",
+    "build": "dotenvx run --env-file=../.env -- react-scripts build"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,yml}": [
