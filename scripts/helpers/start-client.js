@@ -1,18 +1,14 @@
-const { openSSHConnection } = require('./open-ssh-connection');
-const {
-  sshUsername,
-  host,
-  port,
-} = require('./env');
+const { openSSHConnection } = require("./open-ssh-connection");
+const { sshUsername, host, port } = require("./env");
 
 const startClient = async () => {
   const ssh = await openSSHConnection();
 
-  console.log('Launch PM2 Frontend App [STARTED]');
+  console.log("Launch PM2 Frontend App [STARTED]");
 
   const cmd = [
     `pm2 start "http-server -p 80 -o \"/${sshUsername}/OnlyCode/frontend\"" --name "OnlyCode:frontend"`,
-  ].join(' ');
+  ].join(" ");
 
   const { stderr, stdout } = await ssh.execCommand(cmd, {
     cwd: `/${sshUsername}/OnlyCode/frontend`,
@@ -25,7 +21,7 @@ const startClient = async () => {
     process.exit(1);
   }
 
-  console.log('Launch PM2 Frontend App [FINISHED]');
+  console.log("Launch PM2 Frontend App [FINISHED]");
 };
 
 module.exports = { startClient };

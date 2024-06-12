@@ -1,5 +1,5 @@
-const { showLogs } = require('./helpers/show-logs-server');
-const { statusServer } = require('./helpers/status-server');
+const { showLogs } = require("./helpers/show-logs-server");
+const { statusServer } = require("./helpers/status-server");
 
 void (async () => {
   await statusServer();

@@ -1,10 +1,10 @@
-const { openSSHConnection } = require('./open-ssh-connection.js');
-const { sshUsername } = require('./env.js');
+const { openSSHConnection } = require("./open-ssh-connection.js");
+const { sshUsername } = require("./env.js");
 
 const stopClient = async () => {
   const ssh = await openSSHConnection();
 
-  console.log('Stop PM2 Frontend App [STARTED]');
+  console.log("Stop PM2 Frontend App [STARTED]");
 
   const { stderr, stdout } = await ssh.execCommand(
     `pm2 delete "OnlyCode:frontend" || echo ''`,
@@ -18,7 +18,7 @@ const stopClient = async () => {
     console.error(stderr);
   }
 
-  console.log('Stop PM2 Frontend App [FINISHED]');
+  console.log("Stop PM2 Frontend App [FINISHED]");
 };
 
 module.exports = { stopClient };

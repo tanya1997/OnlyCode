@@ -1,13 +1,13 @@
-const { openSSHConnection } = require('./open-ssh-connection');
-const { sshUsername } = require('./env');
+const { openSSHConnection } = require("./open-ssh-connection");
+const { sshUsername } = require("./env");
 
 const serverNPMInstall = async () => {
   const ssh = await openSSHConnection();
 
-  console.log('npm install [STARTED]');
+  console.log("npm install [STARTED]");
 
   const { stderr, stdout } = await ssh.execCommand(`npm install`, {
-    cwd: `/${sshUsername}/TicTacToePlus/server`,
+    cwd: `/${sshUsername}/OnlyCode/backend`,
   });
 
   console.log(stdout);
@@ -15,7 +15,7 @@ const serverNPMInstall = async () => {
     console.error(stderr);
   }
 
-  console.log('npm install [FINISHED]');
+  console.log("npm install [FINISHED]");
 };
 
 module.exports = { serverNPMInstall };

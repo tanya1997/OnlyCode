@@ -4,9 +4,9 @@ import url from "url";
 const getEnv = (name) => {
   const value = process.env[name];
   if (value === "" || value == null) {
-    throw new Error(
-      `Please create .env (see .env.example) or set env "${name}"`,
-    );
+    console.error(process.env);
+    console.error(`Please create .env (see .env.example) or set env "${name}"`);
+    process.exit(1);
   }
   return value;
 };

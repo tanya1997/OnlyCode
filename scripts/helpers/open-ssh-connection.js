@@ -1,5 +1,5 @@
-const { NodeSSH } = require('node-ssh');
-const { sshUsername, sshPassword, sshHost } = require('./env');
+const { NodeSSH } = require("node-ssh");
+const { sshUsername, sshPassword, sshHost } = require("./env");
 
 let ssh = null;
 const openSSHConnection = async () => {
@@ -17,7 +17,7 @@ const openSSHConnection = async () => {
     password: sshPassword,
   });
 
-  console.log('SSH Connected');
+  console.log("SSH Connected");
 
   return ssh;
 };

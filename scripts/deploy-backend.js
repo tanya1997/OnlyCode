@@ -1,7 +1,7 @@
-const { deployServer } = require('./helpers/deploy-server');
+const { deployServer: deployBackend } = require("./helpers/deploy-server");
 
 module.exports = (async () => {
-  await deployServer();
+  await deployBackend();
 
   process.exit(0);
 })().catch((error) => {

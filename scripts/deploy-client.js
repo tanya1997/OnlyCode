@@ -1,4 +1,4 @@
-const { deployClient } = require('./helpers/deploy-client');
+const { deployClient } = require("./helpers/deploy-client");
 
 module.exports = (async () => {
   await deployClient();

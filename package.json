@@ -16,7 +16,8 @@
     "start:frontend": "cd frontend && npm run start",
     "start:backend": "cd backend && npm run start",
     "build:frontend": "cd frontend && npm run build",
-    "deploy:frontend": "npm run build:frontend && dotenvx run --env-file=.env -- node scripts/deploy-client.js",
+    "deploy:frontend": "dotenvx run --env-file=.env -- npm run build:frontend && dotenvx run --env-file=.env -- node scripts/deploy-client.js",
+    "deploy:backend": "dotenvx run --env-file=.env -- node scripts/deploy-backend.js",
     "start": "npm-run-all --parallel start:frontend start:backend",
     "lint": "eslint --quiet",
     "prettier": "prettier '**/*.{svg,yml,js,ts,jsx,tsx,html,md,json,mjs}' --write"

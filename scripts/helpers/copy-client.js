@@ -1,6 +1,6 @@
-const path = require('path');
-const { openSSHConnection } = require('./open-ssh-connection');
-const { clientDir, sshUsername } = require('./env');
+const path = require("path");
+const { openSSHConnection } = require("./open-ssh-connection");
+const { clientDir, sshUsername } = require("./env");
 
 const copyClient = async () => {
   const ssh = await openSSHConnection();
@@ -12,7 +12,7 @@ const copyClient = async () => {
   );
 
   await ssh.putDirectory(
-    path.join(clientDir, 'build'),
+    path.join(clientDir, "build"),
     `/${sshUsername}/OnlyCode/frontend`,
     {
       recursive: true,
@@ -26,7 +26,7 @@ const copyClient = async () => {
   );
 
   if (copyFilesFailed.length > 0) {
-    throw new Error(`Failed transfers: ${copyFilesFailed.join(', ')}`);
+    throw new Error(`Failed transfers: ${copyFilesFailed.join(", ")}`);
   }
 
   console.log(

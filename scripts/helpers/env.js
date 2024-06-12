@@ -1,12 +1,12 @@
-const path = require('path');
-const dotenv = require('dotenv');
+const path = require("path");
+const dotenv = require("dotenv");
 
-const rootDir = path.join(__dirname, '..', '..');
-const serverDir = path.join(rootDir, 'backend');
-const clientDir = path.join(rootDir, 'frontend');
+const rootDir = path.join(__dirname, "..", "..");
+const serverDir = path.join(rootDir, "backend");
+const clientDir = path.join(rootDir, "frontend");
 
 dotenv.config({
-  path: path.join(rootDir, '.prod.env'),
+  path: path.join(rootDir, ".prod.env"),
 });
 
 const sshHost = process.env.SSH_HOST;

@@ -1,4 +1,3 @@
-import { fetchMlServer } from "../fetch-ml-server.mjs";
 import {
   startMLServer,
   stopMLServer,

@@ -1,13 +1,13 @@
-const { openSSHConnection } = require('./open-ssh-connection');
-const { sshUsername } = require('./env');
+const { openSSHConnection } = require("./open-ssh-connection");
+const { sshUsername } = require("./env");
 
 const statusServer = async () => {
   const ssh = await openSSHConnection();
 
-  console.log('Status PM2 App');
+  console.log("Status PM2 Backend App");
 
   const { stderr, stdout } = await ssh.execCommand(`pm2 ls`, {
-    cwd: `/${sshUsername}/TicTacToePlus/server`,
+    cwd: `/${sshUsername}/OnlyCode/backend`,
   });
 
   console.log(stdout);
