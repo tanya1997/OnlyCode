@@ -3,6 +3,7 @@ import { ActionTypes } from "../actions";
 const initialState = {
   token: null,
   isAdmin: false,
+  clientId: null,
 };
 
 export const session = (state = initialState, action) => {

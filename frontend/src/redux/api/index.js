@@ -7,21 +7,21 @@ export const createApi = () => {
     "Content-Type": "application/json",
   };
 
-  const { token, isAdmin } = getSession();
-  saveSession({ headers, token, isAdmin });
+  const { token, isAdmin, clientId } = getSession();
+  saveSession({ headers, token, isAdmin, clientId });
 
   return {
     /* LOGIN / LOGOUT */
 
     async login({ username, password }) {
       try {
-        const { token, isAdmin } = await request({
+        const { token, isAdmin, clientId} = await request({
           url: "/api/login",
           method: "POST",
           payload: { username, password },
         });
-        saveSession({ headers, token, isAdmin });
-        return { token, isAdmin };
+        saveSession({ headers, token, isAdmin, clientId });
+        return { token, isAdmin, clientId };
       } catch (error) {
         error.name = "LoginError";
         throw error;
