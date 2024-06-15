@@ -20,7 +20,7 @@ export const LoginPage = () => {
   const onSubmit = useCallback(() => dispatch(login()), [dispatch]);
 
   return (
-    <Box align="center" pad="large" border={{ size: "medium" }}>
+    <Box align="center" pad="large" margin="large" border={{ size: "medium" }}>
       <Form>
         <FormField name="username" label="Имя пользователя">
           <TextInput

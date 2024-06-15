@@ -15,7 +15,7 @@ export const createApi = () => {
 
     async login({ username, password }) {
       try {
-        const { token, isAdmin, clientId} = await request({
+        const { token, isAdmin, clientId } = await request({
           url: "/api/login",
           method: "POST",
           payload: { username, password },
@@ -69,26 +69,25 @@ export const createApi = () => {
     /* PROMPTS */
 
     async sendPrompt({ text }) {
-      await request({
+      const { id } = await request({
         url: "/api/prompts",
         method: "POST",
         payload: {
-          client_id: "int",
+          client_id: "5675",
           user_info: {
-            gender: "string",
-            age: "int",
-            wage: "int",
-            registration: "bool",
+            gender: "0",
+            age: "25",
+            wage: "2000000",
+            cluster: "super",
           },
           banner: {
             type: "png",
-            count: "int",
-            banner_type: "megabanner",
+            banner_type: "background",
             width: "512",
             height: "512",
           },
           prompt: "string",
-          product: "кредитная карта",
+          product: "AUTO",
         },
         headers,
       });
@@ -123,6 +122,8 @@ export const createApi = () => {
       //   headers,
       // });
       // return { id, text, imgIds, rating };
+      console.log(id);
+      return id;
     },
 
     async listPrompts() {
@@ -165,18 +166,14 @@ export const createApi = () => {
     /* IMAGES */
 
     async loadImage(id) {
-      const { status, contentType, b64Data } = await request({
-        url: `/api/images/${id}}`,
+      const images = await request({
+        url: `/api/images/${id}`,
         method: "GET",
         payload: {},
         headers,
       });
 
-      const result = { status, img: null };
-      if (status === "ready") {
-        result.img = b64toBlobUrl(b64Data, contentType);
-      }
-      return result;
+      return images.map((b64Data) => b64toBlobUrl(b64Data, ""));
     },
 
     /* USERS */

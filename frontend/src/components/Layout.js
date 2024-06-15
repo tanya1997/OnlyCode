@@ -25,24 +25,14 @@ export const Layout = () => {
 
   return (
     <Grommet theme={theme} full>
-      <Grid
-        fill
-        rows={["auto", "flex"]}
-        columns={["auto", "flex"]}
-        areas={[
-          { name: "header", start: [0, 0], end: [1, 0] },
-          { name: "main", start: [0, 1], end: [1, 1] },
-        ]}
-      >
-        <Box gridArea="header">
-          <TopHeader />
-        </Box>
-
-        <Box gridArea="main" justify="center" align="center">
-          {isMLServerAvailable ? <Outlet /> : <LandingPage />}
-        </Box>
-      </Grid>
+      <Box gridArea="header">
+        <TopHeader />
+      </Box>
+      <Box gridArea="main" justify="center" align="center">
+        {isMLServerAvailable ? <Outlet /> : <LandingPage />}
+      </Box>
       <ToastContainer autoClose={2000} />
     </Grommet>
   );
 };
+// align="center"

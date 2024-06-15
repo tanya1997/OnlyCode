@@ -8,7 +8,7 @@ export const getSession = () => {
   };
 };
 
-export const saveSession = ({ headers, token, isAdmin,clientId }) => {
+export const saveSession = ({ headers, token, isAdmin, clientId }) => {
   if (token == null) {
     return clearSession({ headers });
   }

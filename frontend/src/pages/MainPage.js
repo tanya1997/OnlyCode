@@ -7,6 +7,7 @@ import {
   TextArea,
   Text,
   Select,
+  Image,
 } from "grommet";
 import {
   User as UserIcon,
@@ -14,11 +15,11 @@ import {
 } from "grommet-icons";
 
 import { LandingPage } from "./LandingPage";
-import { getIsLogin } from "../redux/selectors";
+import { getIsLogin, getMLImages } from "../redux/selectors";
 import { sendPrompt } from "../redux/actions";
-import { ages,genders,products } from "../constants";
-import {BannerSettingsModal} from "../components/BannerSettingsModal";
-import {UserDetailsModal} from "../components/UserDetailsModal";
+import { ages, clusters, genders, products } from "../constants";
+import { BannerSettingsModal } from "../components/BannerSettingsModal";
+import { UserDetailsModal } from "../components/UserDetailsModal";
 
 const PromptPage = memo(() => {
   const [isUserDetailsModalOpened, setIsUserDetailsModalOpened] =
@@ -55,7 +56,7 @@ const PromptPage = memo(() => {
     [setInput],
   );
 
-  const [imgSrc, setImgSrc] = useState("");
+  const mlImages = useSelector(getMLImages);
 
   const dispatch = useDispatch();
   const sendPromptToMl = useCallback(
@@ -63,47 +64,53 @@ const PromptPage = memo(() => {
     [dispatch],
   );
 
-
   const [product, setProduct] = React.useState("");
-    const onProductChange = useCallback(
-        ({ option }) => setProduct(option),
-        [setProduct],
-    );
+  const onProductChange = useCallback(
+    ({ option }) => setProduct(option),
+    [setProduct],
+  );
 
-    const [gender, setGender] = useState(genders[0]);
-    const onGenderChange = useCallback(
-        ({ option }) => setGender(option),
-        [setGender],
-    );
+  const initialGender = genders[0];
+  const [gender, setGender] = useState(initialGender);
+  const onGenderChange = useCallback(
+    ({ option }) => setGender(option),
+    [setGender],
+  );
 
-    const [age, setAge] = useState(ages[0]);
-    const onAgeChange = useCallback(({ option }) => setAge(option), [setAge]);
+  const initialAge = ages[0];
+  const [age, setAge] = useState(initialAge);
+  const onAgeChange = useCallback(({ option }) => setAge(option), [setAge]);
 
-    const [wage, setWage] = React.useState("480000");
-    const onWageChange = useCallback(
-        (event) => setWage(event.target.value),
-        [setWage],
-    );
+  const initialWage = "480000";
+  const [wage, setWage] = React.useState(initialWage);
+  const onWageChange = useCallback(
+    (event) => setWage(event.target.value),
+    [setWage],
+  );
 
-    const [bannerWidth, setBannerWidth] = useState(512)
-    const onBannerWidthChange = useCallback(
-        (event) => setBannerWidth(event.target.value),
-        [setBannerWidth],
-    );
+  const initialCluster = React.useState(clusters[2]);
+  const [cluster, setCluster] = React.useState(initialCluster);
+  const onClusterChange = useCallback(
+    ({ option }) => setCluster(option),
+    [setCluster],
+  );
 
-    const [bannerHeight, setBannerHeight] = useState(512)
-    const onBannerHeightChange = useCallback(
-        (event) => setBannerHeight(event.target.value),
-        [setBannerHeight],
-    );
+  const [bannerWidth, setBannerWidth] = useState(512);
+  const onBannerWidthChange = useCallback(
+    (event) => setBannerWidth(event.target.value),
+    [setBannerWidth],
+  );
 
-
-
+  const [bannerHeight, setBannerHeight] = useState(512);
+  const onBannerHeightChange = useCallback(
+    (event) => setBannerHeight(event.target.value),
+    [setBannerHeight],
+  );
 
   const isSubmitButtonDisabled = product === "";
 
   return (
-    <Box align="center" justify="center" pad="small">
+    <Box align="center" justify="center" pad="small" gap="small">
       <Box fill align="center" justify="center" direction="row" gap="small">
         <Select
           placeholder="Продукт"
@@ -134,42 +141,51 @@ const PromptPage = memo(() => {
         />
       </Box>
 
-        <UserDetailsModal
-            isOpened={isUserDetailsModalOpened}
-            onSuccess={onUserDetailsSuccess}
-            onCancel={onUserDetailsCancel}
-            gender={gender}
-            onGenderChange={onGenderChange}
-            age={age}
-            onAgeChange={onAgeChange}
-            wage={wage}
-            onWageChange={onWageChange}
-        />
-        <BannerSettingsModal
-            isOpened={isBannerSettingsModalOpened}
-            onSuccess={onBannerSettingsSuccess}
-            onCancel={onBannerSettingsCancel}
-            bannerWidth={bannerWidth}
-            onBannerWidthChange={onBannerWidthChange}
-            bannerHeight={bannerHeight}
-            onBannerHeightChange={onBannerHeightChange}
-        />
-
-
       <TextArea value={input} onChange={inputChangeHandler} />
       <Button
         primary
         label="Сделать хорошо"
         onClick={() => {
           sendPromptToMl();
-          setImgSrc("https://www.personal-dom.ru/data/files/banner2.jpg");
         }}
         disabled={isSubmitButtonDisabled}
       />
-      <img src={imgSrc} />
-      <Box align="center" justify="center" pad="small">
-        <ThumbsRating id="thumb-rating" name="rating" />
-      </Box>
+
+      {mlImages.map((imgSrc, index) => (
+        <Box
+          align="center"
+          justify="center"
+          pad="small"
+          gap="small"
+          key={index}
+        >
+          <Image src={imgSrc} />
+          <ThumbsRating id="thumb-rating" name="rating" />
+        </Box>
+      ))}
+
+      <UserDetailsModal
+        isOpened={isUserDetailsModalOpened}
+        onSuccess={onUserDetailsSuccess}
+        onCancel={onUserDetailsCancel}
+        gender={gender}
+        onGenderChange={onGenderChange}
+        age={age}
+        onAgeChange={onAgeChange}
+        wage={wage}
+        onWageChange={onWageChange}
+        cluster={cluster}
+        onClusterChange={onClusterChange}
+      />
+      <BannerSettingsModal
+        isOpened={isBannerSettingsModalOpened}
+        onSuccess={onBannerSettingsSuccess}
+        onCancel={onBannerSettingsCancel}
+        bannerWidth={bannerWidth}
+        onBannerWidthChange={onBannerWidthChange}
+        bannerHeight={bannerHeight}
+        onBannerHeightChange={onBannerHeightChange}
+      />
     </Box>
   );
 });

@@ -32,8 +32,8 @@ export const BannerSettingsModal = memo(
             <NumberInput
               value={bannerWidth}
               onChange={onBannerWidthChange}
-              step={8}
-              min={8}
+              step={216}
+              min={216}
               max={1600}
               thousandsSeparatorSymbol=" "
             />
@@ -42,13 +42,12 @@ export const BannerSettingsModal = memo(
             <NumberInput
               value={bannerHeight}
               onChange={onBannerHeightChange}
-              step={8}
-              min={8}
+              step={216}
+              min={216}
               max={1600}
               thousandsSeparatorSymbol=" "
             />
           </FormField>
-
           <Box
             as="footer"
             gap="small"

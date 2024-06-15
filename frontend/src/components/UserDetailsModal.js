@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import { Box, Button, FormField, Heading, Layer, Select, Text } from "grommet";
-import { ages, genders } from "../constants";
 import { NumberInput } from "grommet-controls";
+
+import { ages, genders, clusters } from "../constants";
 
 export const UserDetailsModal = memo(
   ({
@@ -14,6 +15,8 @@ export const UserDetailsModal = memo(
     onAgeChange,
     wage,
     onWageChange,
+    cluster,
+    onClusterChange,
   }) => {
     if (!isOpened) {
       return null;
@@ -47,6 +50,13 @@ export const UserDetailsModal = memo(
               onChange={onWageChange}
               step={1000}
               thousandsSeparatorSymbol=" "
+            />
+          </FormField>
+          <FormField label="Тип клиента">
+            <Select
+              value={cluster}
+              options={clusters}
+              onChange={onClusterChange}
             />
           </FormField>
           <Box

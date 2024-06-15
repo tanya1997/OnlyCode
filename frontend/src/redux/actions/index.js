@@ -1,4 +1,5 @@
 import * as ActionTypes from "./action-types";
+import { LOAD_IMAGES_REQUEST } from "./action-types";
 export * as ActionTypes from "./action-types";
 
 export const logout = () => ({
@@ -49,4 +50,14 @@ export const stopMLServer = () => ({
 export const sendPrompt = (text) => ({
   type: ActionTypes.SEND_PROMPT,
   payload: { text },
+});
+
+export const loadImagesRequest = (promptId) => ({
+  type: ActionTypes.LOAD_IMAGES_REQUEST,
+  payload: { promptId },
+});
+
+export const loadImagesSuccess = (promptId, images) => ({
+  type: ActionTypes.LOAD_IMAGES_SUCCESS,
+  payload: { promptId, images },
 });
