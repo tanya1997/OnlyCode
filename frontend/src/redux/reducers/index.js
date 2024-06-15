@@ -11,5 +11,5 @@ export const reducer = combineReducers({
   loginForm,
   mlStatus,
   mlImages,
-  prompt
+  prompt,
 });

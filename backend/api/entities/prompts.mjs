@@ -10,11 +10,11 @@ export const handlers = (app) => (sql) => {
         body: req.body,
       });
       //const response = { id: "response-id" + Date.now() };
-       const response = await fetchMlServer({
-         method: "POST",
-         url: "/",
-         body: req.body,
-       });
+      const response = await fetchMlServer({
+        method: "POST",
+        url: "/",
+        body: req.body,
+      });
       console.log({ response });
 
       await sql(

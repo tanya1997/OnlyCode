@@ -63,50 +63,50 @@ export const loadImagesSuccess = (promptId, images) => ({
 
 export const updatePrompt = (prompt) => ({
   type: ActionTypes.UPDATE_PROMPT,
-  payload: { prompt }
-})
+  payload: { prompt },
+});
 
 export const updateProduct = (product) => ({
   type: ActionTypes.UPDATE_PRODUCT,
-  payload: { product }
-})
+  payload: { product },
+});
 
 export const updateBannerFormat = (format) => ({
   type: ActionTypes.UPDATE_BANNER_FORMAT,
-  payload: { format }
-})
+  payload: { format },
+});
 
 export const updateBannerType = (type) => ({
-  type: ActionTypes.UPDATE_BANNER_FORMAT,
-  payload: { type }
-})
+  type: ActionTypes.UPDATE_BANNER_TYPE,
+  payload: { type },
+});
 
 export const updateBannerWidth = (width) => ({
   type: ActionTypes.UPDATE_BANNER_WIDTH,
-  payload: { width }
-})
+  payload: { width },
+});
 
 export const updateBannerHeight = (height) => ({
   type: ActionTypes.UPDATE_BANNER_HEIGHT,
-  payload: { height }
-})
+  payload: { height },
+});
 
 export const updateGender = (gender) => ({
   type: ActionTypes.UPDATE_GENDER,
-  payload: { gender }
-})
+  payload: { gender },
+});
 
 export const updateAge = (age) => ({
   type: ActionTypes.UPDATE_AGE,
-  payload: { age }
-})
+  payload: { age },
+});
 
 export const updateWage = (wage) => ({
   type: ActionTypes.UPDATE_WAGE,
-  payload: { wage }
-})
+  payload: { wage },
+});
 
 export const updateCluster = (cluster) => ({
   type: ActionTypes.UPDATE_CLUSTER,
-  payload: { cluster }
-})
+  payload: { cluster },
+});

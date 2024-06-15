@@ -15,12 +15,12 @@ import {
 } from "grommet-icons";
 
 import { LandingPage } from "./LandingPage";
-import {getIsLogin, getMLImages, getPromptTags} from "../redux/selectors";
+import { getIsLogin, getMLImages, getPromptTags } from "../redux/selectors";
 import { sendPrompt } from "../redux/actions";
 import { ages, clusters, genders, products } from "../constants";
 import { BannerSettingsModal } from "../components/BannerSettingsModal";
 import { UserDetailsModal } from "../components/UserDetailsModal";
-import {MultilineInputWithTags} from "../components/MultilineInputWithTags";
+import { MultilineInputWithTags } from "../components/MultilineInputWithTags";
 
 const PromptPage = memo(() => {
   const [isUserDetailsModalOpened, setIsUserDetailsModalOpened] =
@@ -43,15 +43,11 @@ const PromptPage = memo(() => {
     () => setIsBannerSettingsModalOpened(true),
     [setIsBannerSettingsModalOpened],
   );
-  const onBannerSettingsCancel = useCallback(
-    () => setIsBannerSettingsModalOpened(false),
-    [setIsBannerSettingsModalOpened],
-  );
-  const onBannerSettingsSuccess = useCallback(() => {
+  const onBannerSettingsClose = useCallback(() => {
     setIsBannerSettingsModalOpened(false);
   }, [setIsBannerSettingsModalOpened]);
 
-  const promptTags = useSelector(getPromptTags)
+  const promptTags = useSelector(getPromptTags);
 
   const [input, setInput] = useState("");
   const inputChangeHandler = useCallback(
@@ -98,16 +94,14 @@ const PromptPage = memo(() => {
     [setCluster],
   );
 
-  const [bannerWidth, setBannerWidth] = useState(512);
-  const onBannerWidthChange = useCallback(
-    (event) => setBannerWidth(event.target.value),
-    [setBannerWidth],
-  );
-
-  const [bannerHeight, setBannerHeight] = useState(512);
-  const onBannerHeightChange = useCallback(
-    (event) => setBannerHeight(event.target.value),
-    [setBannerHeight],
+  const openModalByTagType = useCallback(
+    (type) =>
+      type === "banner"
+        ? onBannerSettingsModalOpen()
+        : type === "userInfo"
+          ? onUserDetailsModalOpen()
+          : null,
+    [onUserDetailsModalOpen, onBannerSettingsModalOpen],
   );
 
   const isSubmitButtonDisabled = product === "";
@@ -117,7 +111,6 @@ const PromptPage = memo(() => {
       <Box fill align="center" justify="center" direction="row" gap="small">
         <Select
           placeholder="Продукт"
-          // required
           value={product}
           options={products}
           onChange={onProductChange}
@@ -143,7 +136,12 @@ const PromptPage = memo(() => {
           plain
         />
       </Box>
-<MultilineInputWithTags value={input} onChange={inputChangeHandler} tags={promptTags}/>
+      <MultilineInputWithTags
+        value={input}
+        tags={promptTags}
+        onChange={inputChangeHandler}
+        onTagClick={openModalByTagType}
+      />
       <Button
         primary
         label="Сделать хорошо"
@@ -181,12 +179,7 @@ const PromptPage = memo(() => {
       />
       <BannerSettingsModal
         isOpened={isBannerSettingsModalOpened}
-        onSuccess={onBannerSettingsSuccess}
-        onCancel={onBannerSettingsCancel}
-        bannerWidth={bannerWidth}
-        onBannerWidthChange={onBannerWidthChange}
-        bannerHeight={bannerHeight}
-        onBannerHeightChange={onBannerHeightChange}
+        onClose={onBannerSettingsClose}
       />
     </Box>
   );

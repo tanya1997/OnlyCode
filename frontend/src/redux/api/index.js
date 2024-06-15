@@ -36,7 +36,7 @@ export const createApi = () => {
 
     async startML() {
       try {
-        await request({ url: "/api/ml/start", method: "PUT", payload: {} });
+        await request({ url: "/api/ml/start", method: "GET", payload: {} });
       } catch (error) {
         error.name = "StartMLServerError";
         throw error;
@@ -45,7 +45,7 @@ export const createApi = () => {
 
     async stopML() {
       try {
-        await request({ url: "/api/ml/stop", method: "PUT", payload: {} });
+        await request({ url: "/api/ml/stop", method: "GET", payload: {} });
       } catch (error) {
         error.name = "StopMLServerError";
         throw error;
@@ -73,22 +73,6 @@ export const createApi = () => {
         url: "/api/prompts",
         method: "POST",
         payload: prompt,
-        // {
-        //   user_info: {
-        //     gender: "0",
-        //     age: "25",
-        //     wage: "2000000",
-        //     cluster: "super",
-        //   },
-        //   banner: {
-        //     type: "png",
-        //     banner_type: "background",
-        //     width: "512",
-        //     height: "512",
-        //   },
-        //   prompt: "string",
-        //   product: "AUTO",
-        // },
         headers,
       });
 
