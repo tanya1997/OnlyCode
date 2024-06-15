@@ -13,6 +13,6 @@
     "express-http-proxy": "^2.0.0"
   },
   "scripts": {
-    "start": "dotenvx run --env-file=.env.example -- cross-env PORT=3001 HOST=0.0.0.0  nodemon api/index.mjs"
+    "start": "dotenvx run --env-file=../.env -- cross-env PORT=3000 HOST=0.0.0.0  nodemon api/index.mjs"
   }
 }
