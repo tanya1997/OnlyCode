@@ -15,11 +15,12 @@ import {
 } from "grommet-icons";
 
 import { LandingPage } from "./LandingPage";
-import { getIsLogin, getMLImages } from "../redux/selectors";
+import {getIsLogin, getMLImages, getPromptTags} from "../redux/selectors";
 import { sendPrompt } from "../redux/actions";
 import { ages, clusters, genders, products } from "../constants";
 import { BannerSettingsModal } from "../components/BannerSettingsModal";
 import { UserDetailsModal } from "../components/UserDetailsModal";
+import {MultilineInputWithTags} from "../components/MultilineInputWithTags";
 
 const PromptPage = memo(() => {
   const [isUserDetailsModalOpened, setIsUserDetailsModalOpened] =
@@ -49,6 +50,8 @@ const PromptPage = memo(() => {
   const onBannerSettingsSuccess = useCallback(() => {
     setIsBannerSettingsModalOpened(false);
   }, [setIsBannerSettingsModalOpened]);
+
+  const promptTags = useSelector(getPromptTags)
 
   const [input, setInput] = useState("");
   const inputChangeHandler = useCallback(
@@ -140,8 +143,7 @@ const PromptPage = memo(() => {
           plain
         />
       </Box>
-
-      <TextArea value={input} onChange={inputChangeHandler} />
+<MultilineInputWithTags value={input} onChange={inputChangeHandler} tags={promptTags}/>
       <Button
         primary
         label="Сделать хорошо"

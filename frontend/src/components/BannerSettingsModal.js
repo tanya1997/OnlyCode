@@ -36,6 +36,7 @@ export const BannerSettingsModal = memo(
               min={216}
               max={1600}
               thousandsSeparatorSymbol=" "
+              plain
             />
           </FormField>
           <FormField label="Высота">
@@ -46,6 +47,7 @@ export const BannerSettingsModal = memo(
               min={216}
               max={1600}
               thousandsSeparatorSymbol=" "
+              plain
             />
           </FormField>
           <Box

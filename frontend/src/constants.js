@@ -63,3 +63,16 @@ export const clusters = [
     value: "not good",
   },
 ];
+
+export const bannerTypes = [
+  {   label: "Ghost", value: 'ghost' },
+  {   label: "NBO",value: 'NBO' },
+  {   label: "MegaBanner",value: 'megabanner' },
+  {   label: "Logo",value: 'logo' },
+  {   label: "Background", value: 'background' }
+]
+
+export const bannerFormats = [
+  {   label: "PNG", value: 'png' },
+  {   label: "JPG",value: 'jpg' }
+]

@@ -1,7 +1,6 @@
 import { fetchMlServer } from "../fetch-ml-server.mjs";
 import { escapeStr } from "../sql-utils.mjs";
 
-let qqq = 1;
 export const handlers = (app) => (sql) => {
   app.post("/api/prompts", async (req, res) => {
     try {
@@ -10,12 +9,12 @@ export const handlers = (app) => (sql) => {
         url: "/",
         body: req.body,
       });
-      const response = { id: "response-id" + qqq++ };
-      //  const response = await fetchMlServer({
-      //    method: "POST",
-      //    url: "/",
-      //    body: req.body,
-      //  });
+      //const response = { id: "response-id" + Date.now() };
+       const response = await fetchMlServer({
+         method: "POST",
+         url: "/",
+         body: req.body,
+       });
       console.log({ response });
 
       await sql(

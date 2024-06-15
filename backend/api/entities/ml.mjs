@@ -16,7 +16,7 @@ export const handlers = (app) => (sql) => {
     }
   });
 
-  app.put("/api/ml/start", async (req, res) => {
+  app.get("/api/ml/start", async (req, res) => {
     try {
       await startMLServer();
       res.json({ ok: true });
@@ -27,7 +27,7 @@ export const handlers = (app) => (sql) => {
     }
   });
 
-  app.put("/api/ml/stop", async (req, res) => {
+  app.get("/api/ml/stop", async (req, res) => {
     try {
       await stopMLServer();
       res.json({ ok: true });

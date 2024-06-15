@@ -50,6 +50,7 @@ export const UserDetailsModal = memo(
               onChange={onWageChange}
               step={1000}
               thousandsSeparatorSymbol=" "
+              plain
             />
           </FormField>
           <FormField label="Тип клиента">

@@ -68,60 +68,30 @@ export const createApi = () => {
 
     /* PROMPTS */
 
-    async sendPrompt({ text }) {
+    async sendPrompt(prompt) {
       const { id } = await request({
         url: "/api/prompts",
         method: "POST",
-        payload: {
-          client_id: "5675",
-          user_info: {
-            gender: "0",
-            age: "25",
-            wage: "2000000",
-            cluster: "super",
-          },
-          banner: {
-            type: "png",
-            banner_type: "background",
-            width: "512",
-            height: "512",
-          },
-          prompt: "string",
-          product: "AUTO",
-        },
+        payload: prompt,
+        // {
+        //   user_info: {
+        //     gender: "0",
+        //     age: "25",
+        //     wage: "2000000",
+        //     cluster: "super",
+        //   },
+        //   banner: {
+        //     type: "png",
+        //     banner_type: "background",
+        //     width: "512",
+        //     height: "512",
+        //   },
+        //   prompt: "string",
+        //   product: "AUTO",
+        // },
         headers,
       });
-      // await request({
-      //   url: "/api/prompts",
-      //   method: "POST",
-      //   payload: {
-      //     client_id: "234",
-      //     user_info: {
-      //       gender: "мужской",
-      //       age: "22",
-      //       wage: "100500",
-      //       registration: "true",
-      //     },
-      //     banner: {
-      //       type: "png", //image/png
-      //       count: "1", //под вопросом (нужен ли он нам)
-      //       banner_type: "megabanner", //ghost, megabanner, nbo (надо их подругому назвать наверно)
-      //       width: "512",
-      //       height: "512",
-      //     },
-      //     prompt: "кредит",
-      //     product: "автокредит",
-      //   },
-      //   headers,
-      // });
 
-      // const { id, imgIds, rating } = await request({
-      //   url: "/api/prompts",
-      //   method: "POST",
-      //   payload: { text },
-      //   headers,
-      // });
-      // return { id, text, imgIds, rating };
       console.log(id);
       return id;
     },
