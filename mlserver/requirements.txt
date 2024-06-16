@@ -1,0 +1,8 @@
+diffusers==0.30.0.dev0
+diffusers.egg==info
+huggingface_hub==0.23.3
+Pillow==10.3.0
+rembg==2.0.57
+safetensors==0.4.3
+torch==2.0.0+cu118
+transformers==4.41.2

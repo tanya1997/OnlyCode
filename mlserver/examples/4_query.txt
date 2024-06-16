@@ -1,0 +1,17 @@
+{
+   "client_id":"3001",
+   "user_info":{
+      "gender":"1",
+      "age":"28",
+      "wage":"2000000",
+      "cluster":"common"
+   },
+   "banner":{
+      "type":"png",
+      "banner_type":"megabanner",
+      "width":"512",
+      "height":"512"
+   },
+   "prompt":"",
+   "product":"MORTG"
+}

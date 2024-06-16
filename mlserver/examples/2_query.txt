@@ -1,0 +1,17 @@
+{
+   "client_id":"5235",
+   "user_info":{
+      "gender":"0",
+      "age":"30",
+      "wage":"2000000",
+      "cluster":"super"
+   },
+   "banner":{
+      "type":"png",
+      "banner_type":"background",
+      "width":"512",
+      "height":"512"
+   },
+   "prompt":"",
+   "product":"AUTO"
+}
