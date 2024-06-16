@@ -12,7 +12,6 @@ export const LandingPage = memo(() => {
         снова уснет
       </Text>
       <Button
-        //label="Horizontal"
         fill="horizontal"
         size="large"
         primary
@@ -40,9 +39,10 @@ export const LandingPage = memo(() => {
           background="dark-1"
         >
           <Text size="large">
-            Потребительский кредит под залог недвижимости для женщины 50 лет
+            #домики #пол_мужской #возраст_35 #зп_x12_2500000 #клиент_super #png
+            #баннер_background #512x512 #продукт_mortg
           </Text>
-          <Image fit="cover" src="//v2.grommet.io/assets/IMG_4245.jpg" />
+          <Image fit="cover" src="/photo_2024-06-16_08-46-13.jpg" />
         </Box>
         <Box
           fill
@@ -52,11 +52,11 @@ export const LandingPage = memo(() => {
           pad="small"
           background="dark-1"
         >
-          <Text size="large">Автомобильный кредит клиенту с супер ЗП</Text>
-          <Image
-            fit="cover"
-            src="//v2.grommet.io/assets/Wilderpeople_Ricky.jpg"
-          />
+          <Text size="large">
+            #машинки #пол_женский #возраст_25 #зп_x12_2000000 #клиент_super #png
+            #баннер_megabanner #512x512 #продукт_auto
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_08-53-25.jpg" />
         </Box>
         <Box
           fill
@@ -66,8 +66,95 @@ export const LandingPage = memo(() => {
           pad="small"
           background="dark-1"
         >
-          <Text size="large">Вклад на 3 года для депозитчика</Text>
-          <Image fit="cover" src="//v2.grommet.io/assets/IMG_4210.jpg" />
+          <Text size="large">
+            #домики #пол_мужской #возраст_35 #зп_x12_2500000 #клиент_super #png
+            #баннер_background #512x512 #продукт_mortg
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_08-46-16.jpg" />
+        </Box>
+        <Box
+          fill
+          align="center"
+          justify="center"
+          gap="small"
+          pad="small"
+          background="dark-1"
+        >
+          <Text size="large">
+            #машинки #пол_женский #возраст_25 #зп_x12_2000000 #клиент_super #png
+            #баннер_megabanner #512x512 #продукт_auto
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_08-53-28.jpg" />
+        </Box>
+        <Box
+          fill
+          align="center"
+          justify="center"
+          gap="small"
+          pad="small"
+          background="dark-1"
+        >
+          <Text size="large">
+            #домики #пол_мужской #возраст_35 #зп_x12_2500000 #клиент_super #png
+            #баннер_background #512x512 #продукт_mortg
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_08-46-19.jpg" />
+        </Box>
+        <Box
+          fill
+          align="center"
+          justify="center"
+          gap="small"
+          pad="small"
+          background="dark-1"
+        >
+          <Text size="large">
+            #машинки #пол_мужской #возраст_25 #зп_x12_2000000 #клиент_common
+            #png #баннер_background #512x512 #продукт_auto
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_09-26-20.jpg" />
+        </Box>
+        <Box
+          fill
+          align="center"
+          justify="center"
+          gap="small"
+          pad="small"
+          background="dark-1"
+        >
+          <Text size="large">
+            #домики #пол_мужской #возраст_35 #зп_x12_2500000 #клиент_super #png
+            #баннер_background #512x512 #продукт_mortg
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_08-46-21.jpg" />
+        </Box>
+        <Box
+          fill
+          align="center"
+          justify="center"
+          gap="small"
+          pad="small"
+          background="dark-1"
+        >
+          <Text size="large">
+            #машинки #пол_мужской #возраст_22 #зп_x12_600000 #клиент_common #png
+            #баннер_ghost #1600x512 #продукт_pc an orange bag of lady
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_09-26-22.jpg" />
+        </Box>
+        <Box
+          fill
+          align="center"
+          justify="center"
+          gap="small"
+          pad="small"
+          background="dark-1"
+        >
+          <Text size="large">
+            #домики #пол_мужской #возраст_35 #зп_x12_2500000 #клиент_super #png
+            #баннер_background #512x512 #продукт_mortg
+          </Text>
+          <Image fit="cover" src="/photo_2024-06-16_08-46-23.jpg" />
         </Box>
       </Carousel>
     </Box>

@@ -5,7 +5,7 @@ import { loadImagesSuccess } from "../actions";
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-const STEP_DELAY = 2500;
+const STEP_DELAY = 4000;
 const DELAY_TIMEOUT = 60000 * 3;
 
 export function* loadImageSaga({ api }, { payload: { promptId } }) {
