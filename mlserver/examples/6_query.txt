@@ -1,0 +1,17 @@
+{
+   "client_id":"3008",
+   "user_info":{
+      "gender":"1",
+      "age":"23",
+      "wage":"80000",
+      "cluster":"common"
+   },
+   "banner":{
+      "type":"png",
+      "banner_type":"NBO",
+      "width":"1600",
+      "height":"1024"
+   },
+   "prompt":"",
+   "product":"PC"
+}

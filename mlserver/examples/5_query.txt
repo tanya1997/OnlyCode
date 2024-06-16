@@ -1,0 +1,17 @@
+{
+   "client_id":"3333",
+   "user_info":{
+      "gender":"0",
+      "age":"38",
+      "wage":"4000000",
+      "cluster":"super"
+   },
+   "banner":{
+      "type":"png",
+      "banner_type":"megabanner",
+      "width":"512",
+      "height":"512"
+   },
+   "prompt":"",
+   "product":"AUTO"
+}
