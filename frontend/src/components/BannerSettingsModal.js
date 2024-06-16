@@ -61,7 +61,7 @@ export const BannerSettingsModal = memo(({ isOpened, onClose }) => {
           <NumberInput
             value={width}
             onChange={onWidthChange}
-            step={216}
+            step={8}
             min={216}
             max={1600}
             thousandsSeparatorSymbol=" "
@@ -72,7 +72,7 @@ export const BannerSettingsModal = memo(({ isOpened, onClose }) => {
           <NumberInput
             value={height}
             onChange={onHeightChange}
-            step={216}
+            step={8}
             min={216}
             max={1600}
             thousandsSeparatorSymbol=" "

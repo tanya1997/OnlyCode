@@ -17,7 +17,7 @@ const initialState = {
   },
   banner: {
     format: bannerFormats[0],
-    type: bannerTypes[0],
+    type: bannerTypes[4],
     width: 512,
     height: 512,
   },

@@ -11,11 +11,7 @@ export const LandingPage = memo(() => {
         Время пробуждения сервера 3-4 минуты. После 15 минут простоя сервер
         снова уснет
       </Text>
-      <Button
-        fill="horizontal"
-        size="large"
-        primary
-      >
+      <Button fill="horizontal" size="large" primary>
         <Box align="center" fill direction="row" gap="small" pad="small">
           <Spinner
             round="full"

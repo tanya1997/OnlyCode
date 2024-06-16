@@ -76,7 +76,6 @@ export const createApi = () => {
         headers,
       });
 
-      console.log(id);
       return id;
     },
 

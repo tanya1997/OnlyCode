@@ -1,23 +1,20 @@
 import React, { useCallback, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  Box,
-  ThumbsRating,
-  TextArea,
-  Text,
-  Select,
-  Image,
-} from "grommet";
+import { Button, Box, ThumbsRating, Text, Select, Image } from "grommet";
 import {
   User as UserIcon,
   SettingsOption as SettingsOptionIcon,
 } from "grommet-icons";
 
 import { LandingPage } from "./LandingPage";
-import { getIsLogin, getMLImages, getPromptTags } from "../redux/selectors";
-import { sendPrompt } from "../redux/actions";
-import { ages, clusters, genders, products } from "../constants";
+import {
+  getIsLogin,
+  getMLImages,
+  getPromptTags,
+  getProduct,
+} from "../redux/selectors";
+import { sendPrompt, updateProduct } from "../redux/actions";
+import { products } from "../constants";
 import { BannerSettingsModal } from "../components/BannerSettingsModal";
 import { UserDetailsModal } from "../components/UserDetailsModal";
 import { MultilineInputWithTags } from "../components/MultilineInputWithTags";
@@ -29,11 +26,7 @@ const PromptPage = memo(() => {
     () => setIsUserDetailsModalOpened(true),
     [setIsUserDetailsModalOpened],
   );
-  const onUserDetailsCancel = useCallback(
-    () => setIsUserDetailsModalOpened(false),
-    [setIsUserDetailsModalOpened],
-  );
-  const onUserDetailsSuccess = useCallback(() => {
+  const onUserDetailsClose = useCallback(() => {
     setIsUserDetailsModalOpened(false);
   }, [setIsUserDetailsModalOpened]);
 
@@ -63,35 +56,10 @@ const PromptPage = memo(() => {
     [dispatch],
   );
 
-  const [product, setProduct] = React.useState("");
+  const product = useSelector(getProduct);
   const onProductChange = useCallback(
-    ({ option }) => setProduct(option),
-    [setProduct],
-  );
-
-  const initialGender = genders[0];
-  const [gender, setGender] = useState(initialGender);
-  const onGenderChange = useCallback(
-    ({ option }) => setGender(option),
-    [setGender],
-  );
-
-  const initialAge = ages[0];
-  const [age, setAge] = useState(initialAge);
-  const onAgeChange = useCallback(({ option }) => setAge(option), [setAge]);
-
-  const initialWage = "480000";
-  const [wage, setWage] = React.useState(initialWage);
-  const onWageChange = useCallback(
-    (event) => setWage(event.target.value),
-    [setWage],
-  );
-
-  const initialCluster = React.useState(clusters[2]);
-  const [cluster, setCluster] = React.useState(initialCluster);
-  const onClusterChange = useCallback(
-    ({ option }) => setCluster(option),
-    [setCluster],
+    ({ option }) => dispatch(updateProduct(option)),
+    [dispatch, updateProduct],
   );
 
   const openModalByTagType = useCallback(
@@ -166,16 +134,7 @@ const PromptPage = memo(() => {
 
       <UserDetailsModal
         isOpened={isUserDetailsModalOpened}
-        onSuccess={onUserDetailsSuccess}
-        onCancel={onUserDetailsCancel}
-        gender={gender}
-        onGenderChange={onGenderChange}
-        age={age}
-        onAgeChange={onAgeChange}
-        wage={wage}
-        onWageChange={onWageChange}
-        cluster={cluster}
-        onClusterChange={onClusterChange}
+        onClose={onUserDetailsClose}
       />
       <BannerSettingsModal
         isOpened={isBannerSettingsModalOpened}

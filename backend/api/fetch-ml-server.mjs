@@ -15,7 +15,6 @@ export const fetchMlServer = async ({ method, url, body, baseUrl }) => {
     },
   });
   const text = await response.text();
-  console.log("!!!!", text);
   const json = JSON.parse(text);
   return json;
 };
