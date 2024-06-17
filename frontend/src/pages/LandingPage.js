@@ -1,7 +1,11 @@
 import React, { memo } from "react";
+import { useHref } from "react-router-dom";
+
 import { Box, Button, Carousel, Heading, Image, Spinner, Text } from "grommet";
 
 export const LandingPage = memo(() => {
+  const href = useHref("/login");
+
   return (
     <Box width="xlarge" overflow="hidden" gap="small" pad="small">
       <Heading level={2}>Сервис генерации маркетинговых изображений</Heading>
@@ -11,7 +15,7 @@ export const LandingPage = memo(() => {
         Время пробуждения сервера 3-4 минуты. После 15 минут простоя сервер
         снова уснет
       </Text>
-      <Button fill="horizontal" size="large" primary>
+      <Button fill="horizontal" size="large" primary href={href}>
         <Box align="center" fill direction="row" gap="small" pad="small">
           <Spinner
             round="full"
