@@ -1,11 +1,37 @@
-import React, { memo } from "react";
+import React, { useCallback, useState, memo } from "react";
 import { useHref } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { MainPage } from "./MainPage";
 import { Box, Button, Carousel, Heading, Image, Spinner, Text } from "grommet";
+import { startMLServer } from "../redux/actions";
+import {PromptPage} from './PromptPage'
+import {
+  getMLStatus
+} from "../redux/selectors";
+import { LoginPage } from "./LoginPage";
+import {
+  getIsLogin,
+} from "../redux/selectors";
 
 export const LandingPage = memo(() => {
   const href = useHref("/login");
+  const mlStatus = useSelector(getMLStatus);
+  const isLogin = useSelector(getIsLogin);
 
+  const dispatch = useDispatch();
+    const sendStartCommandToMl = useCallback(
+      () => dispatch(startMLServer()),
+      [dispatch],
+    );
+
+  if (mlStatus === "ACTIVE"){
+
+    if (isLogin) {
+      return <PromptPage />;
+    }
+  
+    return <LoginPage />;
+  }else{
   return (
     <Box width="xlarge" overflow="hidden" gap="small" pad="small">
       <Heading level={2}>Сервис генерации маркетинговых изображений</Heading>
@@ -13,9 +39,12 @@ export const LandingPage = memo(() => {
       <Text>
         Сервера с GPU дорогие, поэтому предлагаем вам включить его вручную.
         Время пробуждения сервера 3-4 минуты. После 15 минут простоя сервер
-        снова уснет
+        снова уснет. Статус сервера: {mlStatus}
       </Text>
-      <Button fill="horizontal" size="large" primary href={href}>
+      <Button fill="horizontal" size="large" primary onClick={() => {
+        console.log("click")
+          sendStartCommandToMl();
+          }}>
         <Box align="center" fill direction="row" gap="small" pad="small">
           <Spinner
             round="full"
@@ -159,4 +188,5 @@ export const LandingPage = memo(() => {
       </Carousel>
     </Box>
   );
+  } 
 });
