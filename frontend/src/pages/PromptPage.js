@@ -8,18 +8,20 @@ import {
 
 import { LandingPage } from "./LandingPage";
 import {
-  getIsLogin,
-  getMLImages,
-  getPromptTags,
-  getProduct,
+    getIsLogin,
+    getMLImages,
+    getPromptTags,
+    getProduct, getPrompt,
 } from "../redux/selectors";
-import { sendPrompt, updateProduct } from "../redux/actions";
+import {sendPrompt, updateProduct, updatePrompt} from "../redux/actions";
 import { products } from "../constants";
 import { BannerSettingsModal } from "../components/BannerSettingsModal";
 import { UserDetailsModal } from "../components/UserDetailsModal";
 import { MultilineInputWithTags } from "../components/MultilineInputWithTags";
 
 export const PromptPage = memo(() => {
+    const dispatch = useDispatch();
+
     const [isUserDetailsModalOpened, setIsUserDetailsModalOpened] =
       React.useState(false);
     const onUserDetailsModalOpen = useCallback(
@@ -42,18 +44,17 @@ export const PromptPage = memo(() => {
   
     const promptTags = useSelector(getPromptTags);
   
-    const [input, setInput] = useState("");
-    const inputChangeHandler = useCallback(
-      ({ target: { value } }) => setInput(value),
-      [setInput],
+    const prompt = useSelector(getPrompt);
+    const onPromptChange = useCallback(
+      ({ target: { value } }) => dispatch(updatePrompt(value)),
+      [dispatch, updatePrompt],
     );
   
     const mlImages = useSelector(getMLImages);
-  
-    const dispatch = useDispatch();
+
     const sendPromptToMl = useCallback(
-      () => dispatch(sendPrompt(input)),
-      [dispatch],
+      () => dispatch(sendPrompt(prompt)),
+      [dispatch,prompt],
     );
   
     const product = useSelector(getProduct);
@@ -105,9 +106,9 @@ export const PromptPage = memo(() => {
           />
         </Box>
         <MultilineInputWithTags
-          value={input}
+          value={prompt}
           tags={promptTags}
-          onChange={inputChangeHandler}
+          onChange={onPromptChange}
           onTagClick={openModalByTagType}
         />
         <Button
